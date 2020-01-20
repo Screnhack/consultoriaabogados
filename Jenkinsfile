@@ -11,7 +11,7 @@ pipeline{
 	
 		tools {
 		jdk 'JDK8_Centos' 
-		gradle 'Gradle6.0_Centos' 
+		gradle 'Gradle5.0_Centos' 
 		}
 	
 		options {
