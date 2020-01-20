@@ -1,7 +1,7 @@
 pipeline{
 	
 		agent {
-		label 'Slave_Induccion'
+			label 'Slave_Induccion'
 		}
 	
         
@@ -10,8 +10,8 @@ pipeline{
 		}
 	
 		tools {
-		jdk 'JDK8_Centos' 
-		gradle 'Gradle5.0_Centos' 
+			jdk 'JDK8_Centos' 
+			gradle 'Gradle5.0_Centos' 
 		}
 	
 		options {
@@ -31,7 +31,15 @@ pipeline{
 			stage('Checkout') {
 				steps {
                 echo '------------>Checkout desde Git Microservicio<------------'
-                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'consultoriaabogados']], gitTool: 'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId: '7fe28495-6f45-4577-8c7b-dce727e78f14', url: 'https://github.com/Screnhack/consultoriaabogados.git']]])
+                checkout([
+                	$class: 'GitSCM', 
+                	branches: [[name: 'master']], 
+                	doGenerateSubmoduleConfigurations: false, 
+                	extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'consultoriaabogados']], 
+                	gitTool: 'Git_Centos', 
+                	submoduleCfg: [], 
+                	userRemoteConfigs: [[credentialsId: 'GitHub_Screnhack', 
+                	url: 'https://github.com/Screnhack/consultoriaabogados.git']]])
 				}
 			}
 		
@@ -76,6 +84,10 @@ pipeline{
 
 		}
 		post {
+		 success {
+		      echo 'This will run only if successful'
+		      junit 'build/test-results/test/*.xml' 
+    		}	
 			failure {
 				mail(to: 'andres.villamizar@ceiba.com.co',
 				body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
