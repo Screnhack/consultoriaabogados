@@ -84,10 +84,6 @@ pipeline{
 
 		}
 		post {
-		 success {
-		      echo 'This will run only if successful'
-		      junit 'build/test-results/test/*.xml' 
-    		}	
 			failure {
 				mail(to: 'andres.villamizar@ceiba.com.co',
 				body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
