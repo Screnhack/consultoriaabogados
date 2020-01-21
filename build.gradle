@@ -49,8 +49,6 @@ dependencies {
 
 test {
 	useJUnitPlatform()
-	dependsOn 'cleanTest'
-	finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {

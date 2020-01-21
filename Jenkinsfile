@@ -30,12 +30,11 @@ pipeline {
 				submoduleCfg: [], 
 				userRemoteConfigs: [[
 				credentialsId: 'GitHub_Screnhack', 
-				url:'https://github.com/Screnhack/consultoriaabogados'
+					url:'https://github.com/Screnhack/consultoriaabogados'
 				]]
 			])
       }
     }
-    
     stage('Compile & Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
@@ -64,11 +63,10 @@ pipeline {
     failure {
 		echo 'This will run only if failed'
 		mail (to: 'andres.villamizar@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
-		
-		}
+	}
 	success {
 		echo 'This will run only if successful'
-		junit 'build/test-results/test/*.xml' 
+		junit 'build/reports/jacoco/test/*.xml' 
 	}
   }
 }
