@@ -4,6 +4,9 @@ pipeline{
 			label 'Slave_Induccion'
 		}
 	
+		triggers {
+        	pollSCM('@hourly')
+		}
         
 		tools {
 			jdk 'JDK8_Centos' 
@@ -14,47 +17,57 @@ pipeline{
 			buildDiscarder(logRotator(numToKeepStr: '3'))
 			disableConcurrentBuilds()
 		}
-
-		parameters{
-			booleanParam defaultValue: false, description: 'Push a registry AWS', name: 'pushdeploy'
+				environment {
+        PROJECT_PATH_BACK = './'
 		}
+
 		
 		stages{
-		
 			stage('Checkout') {
 				steps {
                 echo '------------>Checkout desde Git Microservicio<------------'
                 checkout([
 	                	$class: 'GitSCM', 
-	                	branches: [[name: '*/master']], 
+	                	branches: [[name: 'master']], 
 	                	doGenerateSubmoduleConfigurations: false, 
 	                	extensions: [], 
 	                	gitTool: 'Git_Centos', 
 	                	submoduleCfg: [], 
 	                	userRemoteConfigs: [[
 	                		credentialsId: 'GitHub_Screnhack', 
-	                		url: 'https://github.com/Screnhack/consultoriaabogados'
+	                		url: 'https://github.com/Screnhack/consultoriaabogados.git'
 	                		]]
                 	])
 				}
 			}
 		
 		
-			stage('Compile & Unit Tests') {
-		      steps{
-		        echo "------------>Unit Tests<------------"
-		        sh 'gradle --b ./build.gradle clean compileJava'
-		      }
-    		}
-    		
-    		stage('Unit Tests') {
-		      steps{
-		        echo "------------>Unit Tests<------------"
-		        sh 'gradle --b ./build.gradle test'
-		
-		      }
-    		}
-			
+			stage('Compile'){
+				parallel {
+					stage('Compile backend'){
+						steps{
+							echo "------------>Compilación backend<------------"
+							dir("${PROJECT_PATH_BACK}"){
+								sh 'gradle build -x test'
+							}
+						}
+					
+					}
+				}
+			}
+			stage('Test Unitarios -Cobertura'){
+				parallel {
+					stage('Test- Cobertura backend'){
+						steps {
+							echo '------------>test backend<------------'
+							dir("${PROJECT_PATH_BACK}"){
+								sh 'gradle --stacktrace test'
+								
+							}
+						}
+					}
+				}
+			}
 			stage('Sonar Analysis'){
 				steps{
 					echo '------------>Analisis de código estático<------------'
@@ -63,14 +76,7 @@ pipeline{
                      }
 				}
 			}
-			stage('Build') {
-			      steps {
-			        echo "------------>Build<------------"
-			        //Construir sin tarea test que se ejecutó previamente
-					sh 'gradle --b ./build.gradle build -x test'
-			      }
-			    }  
-			  }
+		}
 		
 		post {
 			failure {
