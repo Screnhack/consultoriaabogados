@@ -1,12 +1,5 @@
 package com.ceiba.adn.consultoriaabogados.aplicacion.comando;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ConsultaAbogadoComando {
 	private String nombre;
 	private String identificacion;
