@@ -1,7 +1,5 @@
 package com.ceiba.adn.consultoriaabogados.infraestructura.controlador;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +28,4 @@ public class ComandoAbogadoControlador {
 	public ComandoRespuesta<ConsultaAbogadoComando> post(@RequestBody ConsultaAbogadoComando comandoConsultaAbogado) {
 		return this.crearConsultaAbogadoManejador.ejecutar(comandoConsultaAbogado);
 	}
-	
-	@GetMapping("/hello")
-    public ResponseEntity sayHello() {
-        return ResponseEntity.ok("Hola Mundo") ;
-    }
-
 }
