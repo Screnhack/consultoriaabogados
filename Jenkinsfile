@@ -35,13 +35,13 @@ pipeline {
 			])
       }
     }
-   	stage('Build project') {
-    	steps {
-        	echo "------------>Building project<------------"
-            sh 'gradle --b ./build.gradle clean'
-            sh 'gradle --b ./build.gradle build'
-        }
-    }
+					   	stage('Build project') {
+					    	steps {
+					        	echo "------------>Building project<------------"
+					            sh 'gradle --b ./build.gradle clean'
+					            sh 'gradle --b ./build.gradle build'
+					        }
+					    }
                         stage('Compile & Unit Tests') {
                            steps {
                               echo "--------------->Unit Tests<--------"
@@ -66,10 +66,10 @@ pipeline {
   }
 
   post {
-  success {
+  	success {
 			echo '--------success------------------'
 			junit 'build/test-results/test/*.xml' 
-		}
+	}
     failure {
 		echo 'This will run only if failed'
 		mail (to: 'andres.villamizar@ceiba.com.co',
