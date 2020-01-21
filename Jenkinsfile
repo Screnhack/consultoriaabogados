@@ -15,12 +15,12 @@ pipeline{
 		}
 	
 		options {
-			buildDiscarder(logRotator(numToKeepStr: '5'))
+			buildDiscarder(logRotator(numToKeepStr: '3'))
 			disableConcurrentBuilds()
 		}
 		
 		environment {
-        PROJECT_PATH_BACK = 'consultoriaabogados'
+        PROJECT_PATH_BACK = './consultoriaabogados'
 		}
 		parameters{
 			booleanParam defaultValue: false, description: 'Push a registry AWS', name: 'pushdeploy'
@@ -64,7 +64,6 @@ pipeline{
 							echo '------------>test backend<------------'
 							dir("${PROJECT_PATH_BACK}"){
 								sh 'gradle --stacktrace test'
-								
 							}
 						}
 					}
