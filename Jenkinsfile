@@ -38,7 +38,7 @@ pipeline {
     stage('Compile & Unit Tests') {
       steps{
       	echo "------------>Clean Tests<------------"
-			sh 'gradle --b ./build.gradle clean'
+			sh 'gradle --b ./build.gradle clean compileJava'
         echo "------------>Unit Tests<------------"
 			sh 'gradle --b ./build.gradle test'
       }
@@ -62,13 +62,14 @@ pipeline {
   }
 
   post {
+  	success {
+		echo 'This will run only if successful'
+		junit 'build/test-results/test/*.xml' 
+	}
     failure {
 		echo 'This will run only if failed'
 		mail (to: 'andres.villamizar@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
 	}
-	success {
-		echo 'This will run only if successful'
-		junit 'build/test-results/test/*.xml' 
-	}
+	
   }
 }
