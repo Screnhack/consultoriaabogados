@@ -68,6 +68,10 @@ pipeline {
 		subject: "Failed Pipeline:${currentBuild.fullDisplayName}",
 		body: "Something is wrong with ${env.BUILD_URL}")
 	}
+	success {
+			echo 'This will run only if successful'
+			junit 'build/test-results/test/*.xml' 
+		}
 	
   }
 }
