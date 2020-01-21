@@ -1,89 +1,75 @@
-pipeline{
-	
-		agent {
-			label 'Slave_Induccion'
-		}
-	
-		triggers {
-        	pollSCM('@hourly')
-		}
-        
-		tools {
-			jdk 'JDK8_Centos' 
-			gradle 'Gradle5.0_Centos' 
-		}
-	
-		options {
-			buildDiscarder(logRotator(numToKeepStr: '3'))
-			disableConcurrentBuilds()
-		}
-				environment {
-        PROJECT_PATH_BACK = './'
-		}
+pipeline {
+  //Donde se va a ejecutar el Pipeline
+  agent {
+    label 'Slave_Induccion'
+  }
 
+  //Opciones específicas de Pipeline dentro del Pipeline
+  options {
+    	buildDiscarder(logRotator(numToKeepStr: '3'))
+ 	disableConcurrentBuilds()
+  }
+
+  //Una sección que define las herramientas “preinstaladas” en Jenkins
+  tools {
+    jdk 'JDK8_Centos' //Preinstalada en la Configuración del Master
+    gradle 'Gradle4.5_Centos' //Preinstalada en la Configuración del Master
+  }
+
+  //Aquí comienzan los “items” del Pipeline
+  stages{
+    stage('Checkout') {
+      steps{
+        echo "------------>Checkout<------------"
+	       checkout([
+				$class: 'GitSCM', 
+				branches: [[name: '*/master']], 
+				doGenerateSubmoduleConfigurations: false, 
+				extensions: [], 
+				gitTool: 'Default', 
+				submoduleCfg: [], 
+				userRemoteConfigs: [[
+				credentialsId: 'GitHub_Screnhack', 
+				url:'https://github.com/Screnhack/consultoriaabogados'
+				]]
+			])
+      }
+    }
+    
+    stage('Compile & Unit Tests') {
+      steps{
+        echo "------------>Unit Tests<------------"
+			sh 'gradle --b ./consultoriaabogados/build.gradle clean compileJava'
+			sh 'gradle --b ./build.gradle test'
+      }
+    }
+
+    stage('Static Code Analysis') {
+      steps{
+        echo '------------>Análisis de código estático<------------'
+        withSonarQubeEnv('Sonar') {
+			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+        }
+      }
+    }
+
+    stage('Build') {
+      steps {
+        echo "------------>Build<------------"
+        sh 'gradle --b ./build.gradle build -x test'
+      }
+    }  
+  }
+
+  post {
+    failure {
+		echo 'This will run only if failed'
+		mail (to: 'andres.villamizar@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
 		
-		stages{
-			stage('Checkout') {
-				steps {
-                echo '------------>Checkout desde Git Microservicio<------------'
-                checkout([
-	                	$class: 'GitSCM', 
-	                	branches: [[name: 'master']], 
-	                	doGenerateSubmoduleConfigurations: false, 
-	                	extensions: [], 
-	                	gitTool: 'Git_Centos', 
-	                	submoduleCfg: [], 
-	                	userRemoteConfigs: [[
-	                		credentialsId: 'GitHub_Screnhack', 
-	                		url: 'https://github.com/Screnhack/consultoriaabogados.git'
-	                		]]
-                	])
-				}
-			}
-		
-		
-			stage('Compile'){
-				parallel {
-					stage('Compile backend'){
-						steps{
-							echo "------------>Compilación backend<------------"
-							dir("${PROJECT_PATH_BACK}"){
-								sh 'gradle build -x test'
-							}
-						}
-					
-					}
-				}
-			}
-			stage('Test Unitarios -Cobertura'){
-				parallel {
-					stage('Test- Cobertura backend'){
-						steps {
-							echo '------------>test backend<------------'
-							dir("${PROJECT_PATH_BACK}"){
-								sh 'gradle --stacktrace test'
-								
-							}
-						}
-					}
-				}
-			}
-			stage('Sonar Analysis'){
-				steps{
-					echo '------------>Analisis de código estático<------------'
-					 	withSonarQubeEnv('Sonar') {
-                     	sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=./sonar-project.properties"
-                     }
-				}
-			}
 		}
-		
-		post {
-			failure {
-				mail(to: 'andres.villamizar@ceiba.com.co',
-				body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
-				subject: "ERROR CI: ${env.JOB_NAME}")
-			}
-		}	
-			
+	success {
+		echo 'This will run only if successful'
+		junit 'build/test-results/test/*.xml' 
+	}
+  }
 }
