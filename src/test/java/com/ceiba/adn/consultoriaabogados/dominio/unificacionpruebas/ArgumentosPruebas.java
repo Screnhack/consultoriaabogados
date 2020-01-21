@@ -17,7 +17,7 @@ public class ArgumentosPruebas {
 	private static final String JUDICIAL = "JUDICIAL";
 	private static final String PAGADA = "PAGADA";
 	private static final String OCUPADO = "OCUPADO";
-	private static final String IDENTIFICACION_ESTA_VACIA = "Se debe ingresar la identificación del cliente";
+	private static final String IDENTIFICACION_ESTA_VACIA = "Se debe ingresar la identificacion del cliente";
 	private static final String ESTADO_INVALIDO = "Se debe ingresar un tipo de valido de estado";
 	private static final String TIPO_DE_CONSULTA_INVALIDO = "Se debe ingresar un tipo valido de consulta";
 

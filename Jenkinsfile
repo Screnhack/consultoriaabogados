@@ -13,7 +13,7 @@ pipeline {
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
     jdk 'JDK8_Centos' //Preinstalada en la Configuración del Master
-    gradle 'Gradle5.0_Centos' //Preinstalada en la Configuración del Master
+    gradle 'Gradle5.6_Centos' //Preinstalada en la Configuración del Master
   }
 
   //Aquí comienzan los “items” del Pipeline
@@ -26,7 +26,7 @@ pipeline {
 				branches: [[name: '*/master']], 
 				doGenerateSubmoduleConfigurations: false, 
 				extensions: [], 
-				gitTool: 'Default', 
+				gitTool: 'Git_Centos', 
 				submoduleCfg: [], 
 				userRemoteConfigs: [[
 				credentialsId: 'GitHub_Screnhack', 
@@ -35,30 +35,34 @@ pipeline {
 			])
       }
     }
-    stage('Compile & Unit Tests') {
-      steps{
-      	echo "------------>Clean Tests<------------"
-			sh 'gradle --b ./build.gradle clean compileJava'
-        echo "------------>Unit Tests<------------"
-			sh 'gradle --b ./build.gradle test'
-      }
-    }
-
-    stage('Static Code Analysis') {
-      steps{
-        echo '------------>Análisis de código estático<------------'
-        withSonarQubeEnv('Sonar') {
-			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=./sonar-project.properties"
+   	stage('Build project') {
+    	steps {
+        	echo "------------>Building project<------------"
+            sh 'gradle --b ./build.gradle clean'
+            sh 'gradle --b ./build.gradle build'
         }
-      }
     }
-
-    stage('Build') {
-      steps {
-        echo "------------>Build<------------"
-        sh 'gradle --b ./build.gradle build -x test'
-      }
-    }  
+                        stage('Compile & Unit Tests') {
+                           steps {
+                              echo "--------------->Unit Tests<--------"
+                              sh 'gradle --b ./build.gradle test'
+                              sh 'gradle --b ./build.gradle jacocoTestReport'
+                           }
+                        }
+                        stage('Static Code Analysys'){
+                           steps {
+                              echo '----------------->Analisis de Código estático<-----------------'
+                              withSonarQubeEnv('Sonar'){
+                                 sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties -Dsonar.java.libraries=/home/ic/.gradle/caches/modules-2/files-2.1/**/*.jar"
+                              }
+                           }
+                        }
+                        stage('Build') {
+                           steps {
+                              echo "-------->Build<---------"
+                              sh 'gradle --b ./build.gradle build -x test'
+                           }
+                        }  
   }
 
   post {
@@ -72,6 +76,5 @@ pipeline {
 			echo 'This will run only if successful'
 			junit 'build/test-results/test/*.xml' 
 		}
-	
   }
 }

@@ -9,7 +9,7 @@ public class ConsultaAbogado {
 
 	private FormatearFechas formatearFechas;
 	private static final String NOMBRE_ESTA_VACIO = "Se debe ingresar el nombre del cliente";
-	private static final String IDENTIFICACION_ESTA_VACIA = "Se debe ingresar la identificación del cliente";
+	private static final String IDENTIFICACION_ESTA_VACIA = "Se debe ingresar la identificacion del cliente";
 	private static final String FECHA_ESTA_VACIA = "Se debe registrar la fecha de la cita";
 	private static final String ESTADO_INVALIDO = "Se debe ingresar un tipo de valido de estado";
 	private static final String TIPO_DE_CONSULTA_INVALIDO = "Se debe ingresar un tipo valido de consulta";
