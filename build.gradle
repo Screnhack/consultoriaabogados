@@ -48,8 +48,25 @@ dependencies {
 }
 
 test {
-	useJUnitPlatform()
-	jacocoTestReport
+	 afterSuite {suite, result ->
+         result.exception?.PrintStackTrace ()
+     }
+}
+
+jacoco {
+	toolVersion = "0.8.5"
+	reportsDir = file("$buildDir/reports/jacoco")
+}
+
+jacocoTestReport{
+	additionalSourceDirs.from = files(sourceSets.main.allJava.srcDirs)
+		reports {
+			html.enabled true
+			xml.enabled true
+			csv.enabled false
+			html.destination file("build/reports/jacoco/html")
+		}
+	executionData.from = files('build/jacoco/test.xml')
 }
 
 jacocoTestReport {

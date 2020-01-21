@@ -13,7 +13,7 @@ pipeline {
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
     jdk 'JDK8_Centos' //Preinstalada en la Configuración del Master
-    gradle 'Gradle5.0_Centos' //Preinstalada en la Configuración del Master
+    gradle 'Gradle5.6_Centos' //Preinstalada en la Configuración del Master
   }
 
   //Aquí comienzan los “items” del Pipeline
@@ -30,13 +30,15 @@ pipeline {
 				submoduleCfg: [], 
 				userRemoteConfigs: [[
 				credentialsId: 'GitHub_Screnhack', 
-					url:'https://github.com/Screnhack/consultoriaabogados'
+					url:'https://github.com/Screnhack/consultoriaabogados.git'
 				]]
 			])
       }
     }
     stage('Compile & Unit Tests') {
       steps{
+      	echo "------------>Clean Tests<------------"
+			sh 'gradle --b ./build.gradle clean'
         echo "------------>Unit Tests<------------"
 			sh 'gradle --b ./build.gradle test'
       }
@@ -66,7 +68,7 @@ pipeline {
 	}
 	success {
 		echo 'This will run only if successful'
-		junit 'build/jacoco/test.exec' 
+		junit 'build/test-results/test/*.xml' 
 	}
   }
 }
