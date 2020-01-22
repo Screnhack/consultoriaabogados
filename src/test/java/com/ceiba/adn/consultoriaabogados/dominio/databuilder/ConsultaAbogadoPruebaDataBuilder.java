@@ -1,4 +1,4 @@
-package com.ceiba.adn.consultoriaabogados.dominio.pruebasdatabuilder;
+package com.ceiba.adn.consultoriaabogados.dominio.databuilder;
 
 import java.util.Date;
 

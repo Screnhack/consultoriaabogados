@@ -11,11 +11,11 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ceiba.adn.consultoriaabogados.dominio.databuilder.ConsultaAbogadoPruebaDataBuilder;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionClienteConsultaDia;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionDiaProhibidos;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionTipoConsulta;
 import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
-import com.ceiba.adn.consultoriaabogados.dominio.pruebasdatabuilder.ConsultaAbogadoPruebaDataBuilder;
 import com.ceiba.adn.consultoriaabogados.dominio.puerto.repositorio.ConsultaAbogadoRepositorio;
 import com.ceiba.adn.consultoriaabogados.dominio.servicio.CrearConsultaAbogadoServicio;
 import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;

@@ -1,13 +1,13 @@
 package com.ceiba.adn.consultoriaabogados.aplicacion.comando;
 
 public class ComandoRespuesta<T> {
-	private T value;
+	private T valor;
 
-	public ComandoRespuesta(T value) {
-		this.value = value;
+	public ComandoRespuesta(T valor) {
+		this.valor = valor;
 	}
 
 	public T getValue() {
-		return value;
+		return valor;
 	}
 }

@@ -1,13 +1,14 @@
 package com.ceiba.adn.consultoriaabogados.aplicacion.comando.mapeador;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.ceiba.adn.consultoriaabogados.aplicacion.comando.ConsultaAbogadoComando;
 import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
+import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;
 
 public final class ConsultaAbogadoMapeador {
+	private FormatearFechas formatearFecha;
+	
 	private ConsultaAbogadoMapeador() {
+		this.formatearFecha = new FormatearFechas();
 	}
 
 	private static final ConsultaAbogadoMapeador INSTANCE = new ConsultaAbogadoMapeador();
@@ -23,13 +24,8 @@ public final class ConsultaAbogadoMapeador {
 		dominio.setCelular(entidad.getCelular());
 		dominio.setTipoConsultoria(entidad.getTipoConsultoria());
 		dominio.setEstado(entidad.getEstado());
-		dominio.setFechaConsulta(formatearFechaString(entidad.getFechaConsulta()));
+		dominio.setFechaConsulta(this.formatearFecha.formatearFechaString(entidad.getFechaConsulta()));
 		dominio.setPrecio(entidad.getPrecio());
 		return dominio;
-	}
-
-	public String formatearFechaString(Date fechaConsulta) {
-		SimpleDateFormat formatearFecha = new SimpleDateFormat("yyyy-MM-dd");
-		return formatearFecha.format(fechaConsulta);
 	}
 }

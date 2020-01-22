@@ -13,44 +13,44 @@ public class ConsultaAbogadoComando {
 		return nombre;
 	}
 
-	public String getIdentificacion() {
-		return identificacion;
-	}
-
-	public String getCelular() {
-		return celular;
-	}
-
-	public String getTipoConsultoria() {
-		return tipoConsultoria;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public String getFechaConsulta() {
-		return fechaConsulta;
-	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getIdentificacion() {
+		return identificacion;
 	}
 
 	public void setIdentificacion(String identificacion) {
 		this.identificacion = identificacion;
 	}
 
+	public String getCelular() {
+		return celular;
+	}
+
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+
+	public String getTipoConsultoria() {
+		return tipoConsultoria;
 	}
 
 	public void setTipoConsultoria(String tipoConsultoria) {
 		this.tipoConsultoria = tipoConsultoria;
 	}
 
+	public String getEstado() {
+		return estado;
+	}
+
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getFechaConsulta() {
+		return fechaConsulta;
 	}
 
 	public void setFechaConsulta(String fechaConsulta) {

@@ -16,6 +16,7 @@ public class CrearConsultaAbogadoServicio {
 	private static final String DIA_DOMINGO = "El Domingo no se pueden agendar citas";
 	private static final String DIA_LUNES = "El lunes no se pueden agendar citas de tipo judicial";
 	private static final String TIPO_DE_CONSULTA_INVALIDO = "Se debe ingresar un tipo valido de consulta";
+	private static final double PROCENTAJE_AUMENTO_SABADO = 0.5 ;
 
 	public CrearConsultaAbogadoServicio(ConsultaAbogadoRepositorio consultaAbogadoRepositorio) {
 		this.consultaAbogadoRepositorio = consultaAbogadoRepositorio;
@@ -59,7 +60,7 @@ public class CrearConsultaAbogadoServicio {
 	}
 
 	public float precioTipoConsulta(String tipoConsulta, Date fechaConsulta) {
-		float precio = 0;
+		int precio = 0;
 		float precioTotalConsulta = 0;
 		switch (tipoConsulta) {
 		case "FAMILIAR":
@@ -77,7 +78,7 @@ public class CrearConsultaAbogadoServicio {
 		}
 		boolean aumento = validarConsultaDiaSabado(fechaConsulta);
 		if (aumento) {
-			precioTotalConsulta = precio + ((precio * 50) / 100);
+			precioTotalConsulta = (float) (precio + (precio * PROCENTAJE_AUMENTO_SABADO));
 		} else {
 			precioTotalConsulta = precio;
 		}

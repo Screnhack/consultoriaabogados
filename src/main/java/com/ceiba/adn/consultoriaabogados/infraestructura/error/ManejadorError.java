@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionArgumentos;
+import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionClienteConsultaDia;
+import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionFormatoFecha;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionNoExisteConsultaAbogado;
 
 @ControllerAdvice
@@ -23,6 +25,8 @@ public class ManejadorError {
 	public ManejadorError() {
 		CODIGOS_ESTADO.put(ExcepcionArgumentos.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 		CODIGOS_ESTADO.put(ExcepcionNoExisteConsultaAbogado.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+		CODIGOS_ESTADO.put(ExcepcionClienteConsultaDia.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+		CODIGOS_ESTADO.put(ExcepcionFormatoFecha.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 	}
 
 	@ExceptionHandler(Exception.class)

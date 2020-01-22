@@ -1,6 +1,5 @@
 package com.ceiba.adn.consultoriaabogados.aplicacion.consulta;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ListarConsultaAbogado {
@@ -10,7 +9,7 @@ public class ListarConsultaAbogado {
 	private String celular;
 	private String tipoConsultoria;
 	private String estado;
-	private String fechaConsulta;
+	private Date fechaConsulta;
 
 	public ListarConsultaAbogado(Long id, String nombre, String identificacion, String celular, String tipoConsultoria,
 			String estado, Date fechaConsulta) {
@@ -20,7 +19,7 @@ public class ListarConsultaAbogado {
 		this.celular = celular;
 		this.tipoConsultoria = tipoConsultoria;
 		this.estado = estado;
-		this.fechaConsulta = formatearFechaString(fechaConsulta);
+		this.fechaConsulta = fechaConsulta;
 	}
 
 	public Long getId() {
@@ -71,16 +70,11 @@ public class ListarConsultaAbogado {
 		this.estado = estado;
 	}
 
-	public String getFechaConsulta() {
+	public Date getFechaConsulta() {
 		return fechaConsulta;
 	}
 
-	public void setFechaConsulta(String fechaConsulta) {
+	public void setFechaConsulta(Date fechaConsulta) {
 		this.fechaConsulta = fechaConsulta;
-	}
-
-	public String formatearFechaString(Date fechaConsulta) {
-		SimpleDateFormat formatearFecha = new SimpleDateFormat("yyyy-MM-dd");
-		return formatearFecha.format(fechaConsulta);
 	}
 }

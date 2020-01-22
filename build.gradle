@@ -36,12 +36,16 @@ dependencies {
 	testImplementation 'org.flywaydb.flyway-test-extensions:flyway-spring-test:5.2.1'
 	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.13.0'
 }
+
 test {
-	useJUnitPlatform()
+ useJUnitPlatform()
+ finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-	reports {
-		xml.enabled true
-	}
+ reports {
+     xml.enabled true
+     csv.enabled true
+     html.destination file("${buildDir}/test-results/jacocoHtml")
+ }
 }

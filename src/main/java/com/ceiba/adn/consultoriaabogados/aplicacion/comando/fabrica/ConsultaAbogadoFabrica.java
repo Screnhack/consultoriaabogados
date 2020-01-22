@@ -8,10 +8,10 @@ import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
 @Component
 public class ConsultaAbogadoFabrica {
 
-	public ConsultaAbogado crearConsulta(ConsultaAbogadoComando comandoConsultaAbogado) {
-		return new ConsultaAbogado(comandoConsultaAbogado.getNombre(), comandoConsultaAbogado.getIdentificacion(),
-				comandoConsultaAbogado.getCelular(), comandoConsultaAbogado.getTipoConsultoria(),
-				comandoConsultaAbogado.getEstado(), comandoConsultaAbogado.getFechaConsulta());
+	public ConsultaAbogado crearConsulta(ConsultaAbogadoComando consultaAbogadoComando) {
+		return new ConsultaAbogado(consultaAbogadoComando.getNombre(), consultaAbogadoComando.getIdentificacion(),
+				consultaAbogadoComando.getCelular(), consultaAbogadoComando.getTipoConsultoria(),
+				consultaAbogadoComando.getEstado(), consultaAbogadoComando.getFechaConsulta());
 	}
 
 }
