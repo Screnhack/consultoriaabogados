@@ -55,6 +55,7 @@ public class ConsultaAbogadoPruebaDataBuilder {
 		consultaAbogado.setEstado(this.estado);
 		consultaAbogado.setFechaConsulta(this.fechaConsulta);
 		return consultaAbogado;
+
 	}
 
 }

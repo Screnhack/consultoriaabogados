@@ -2,6 +2,7 @@ package com.ceiba.adn.consultoriaabogados.infraestructura.controlador;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,11 @@ public class ConsultaAbogadoControlador {
 	@ApiOperation("Buscar Consulta Abogado")
 	public ListarConsultaAbogado getBuscarConsulta(@PathVariable Long id) {
 		return this.buscarConsultaAbogadoManejador.ejecutar(id);
+	}
+
+	@GetMapping("/hello")
+	public ResponseEntity sayHello() {
+		return ResponseEntity.ok(this.listarConsultaAbogadoManejadorConsulta.helloWorld());
 	}
 
 }

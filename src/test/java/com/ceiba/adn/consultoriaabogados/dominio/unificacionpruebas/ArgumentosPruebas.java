@@ -4,12 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionArgumentos;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionEstadoInvalido;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionTipoConsulta;
 import com.ceiba.adn.consultoriaabogados.dominio.validador.ValidadorArgumentos;
 
+@SpringBootTest
 public class ArgumentosPruebas {
 	private static final String ESTA_VACIO = "";
 	private static final String CEDULA = "102078049";

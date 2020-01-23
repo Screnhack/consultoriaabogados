@@ -19,4 +19,8 @@ public class ListarConsultasAbogadoManejador {
 	public List<ListarConsultaAbogado> ejecutar() {
 		return this.listarConsultasAbogadoServicio.listarConsultasAbogado();
 	}
+	
+	public String helloWorld() {
+        return "Hola Mundo";
+    }
 }

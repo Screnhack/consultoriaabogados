@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
@@ -37,7 +38,7 @@ public class ConsultaAbogadoEntidad implements Serializable {
 	@Column(name = "estado", nullable = false)
 	private String estado;
 
-	@javax.persistence.Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_consulta")
 	private Date fechaConsulta;
 

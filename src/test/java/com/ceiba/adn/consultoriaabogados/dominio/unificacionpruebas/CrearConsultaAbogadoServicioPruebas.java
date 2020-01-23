@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ceiba.adn.consultoriaabogados.dominio.databuilder.ConsultaAbogadoPruebaDataBuilder;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionClienteConsultaDia;
@@ -19,7 +20,7 @@ import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
 import com.ceiba.adn.consultoriaabogados.dominio.puerto.repositorio.ConsultaAbogadoRepositorio;
 import com.ceiba.adn.consultoriaabogados.dominio.servicio.CrearConsultaAbogadoServicio;
 import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;
-
+@SpringBootTest
 public class CrearConsultaAbogadoServicioPruebas {
 
 	private ConsultaAbogadoRepositorio repositorio;

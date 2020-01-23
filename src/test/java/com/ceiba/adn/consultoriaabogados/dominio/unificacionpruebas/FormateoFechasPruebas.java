@@ -7,10 +7,12 @@ import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionFormatoFecha;
 import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;
 
+@SpringBootTest
 public class FormateoFechasPruebas {
 
 	private static final String FORMATO_FECHA_STRING = "2020-01-20";

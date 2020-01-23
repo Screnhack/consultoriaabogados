@@ -38,8 +38,9 @@ public class ConsultaAbogado {
 		this.estado = estado;
 		this.fechaConsulta = formatearFecha.formatearFechaDate(fecha);
 	}
-
+	
 	public ConsultaAbogado() {
+		
 	}
 
 	public Long getId() {
