@@ -2,6 +2,7 @@ package com.ceiba.adn.consultoriaabogados.infraestructura.controlador;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.ceiba.adn.consultoriaabogados.aplicacion.consulta.manejador.ListarCon
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/consulta/abogado")
 @Api(tags = { "Controlador de abogados" })
