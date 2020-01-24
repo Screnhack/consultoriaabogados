@@ -1,5 +1,7 @@
 package com.ceiba.adn.consultoriaabogados.infraestructura.pruebasdatabuilder;
 
+import java.util.Date;
+
 import com.ceiba.adn.consultoriaabogados.aplicacion.comando.ConsultaAbogadoComando;
 
 public class ConsultaAbogadoPruebasDataBuilderComando {
@@ -8,7 +10,7 @@ public class ConsultaAbogadoPruebasDataBuilderComando {
 	private String celular;
 	private String tipoConsultoria;
 	private String estado;
-	private String fechaConsulta;
+	private Date fechaConsulta;
 
 	public ConsultaAbogadoPruebasDataBuilderComando() {
 	}
@@ -38,7 +40,7 @@ public class ConsultaAbogadoPruebasDataBuilderComando {
 		return this;
 	}
 
-	public ConsultaAbogadoPruebasDataBuilderComando conFechaConsulta(String fechaConsulta) {
+	public ConsultaAbogadoPruebasDataBuilderComando conFechaConsulta(Date fechaConsulta) {
 		this.fechaConsulta = fechaConsulta;
 		return this;
 	}

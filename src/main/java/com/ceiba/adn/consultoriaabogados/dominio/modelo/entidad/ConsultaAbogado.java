@@ -24,7 +24,7 @@ public class ConsultaAbogado {
 	private float precio;
 
 	public ConsultaAbogado(String nombre, String identificacion, String celular, String tipoConsultoria, String estado,
-			String fecha) {
+			Date fecha) {
 		ValidadorArgumentos.validarRequeridos(nombre, NOMBRE_ESTA_VACIO);
 		ValidadorArgumentos.validarRequeridos(identificacion, IDENTIFICACION_ESTA_VACIA);
 		ValidadorArgumentos.validarRequeridos(fecha, FECHA_ESTA_VACIA);
@@ -36,11 +36,11 @@ public class ConsultaAbogado {
 		this.celular = celular;
 		this.tipoConsultoria = tipoConsultoria;
 		this.estado = estado;
-		this.fechaConsulta = formatearFecha.formatearFechaDate(fecha);
+		this.fechaConsulta = fecha;
 	}
-	
+
 	public ConsultaAbogado() {
-		
+
 	}
 
 	public Long getId() {

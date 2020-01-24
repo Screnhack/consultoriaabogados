@@ -24,7 +24,7 @@ public final class ConsultaAbogadoMapeador {
 		dominio.setCelular(entidad.getCelular());
 		dominio.setTipoConsultoria(entidad.getTipoConsultoria());
 		dominio.setEstado(entidad.getEstado());
-		dominio.setFechaConsulta(this.formatearFecha.formatearFechaString(entidad.getFechaConsulta()));
+		dominio.setFechaConsulta(entidad.getFechaConsulta());
 		dominio.setPrecio(entidad.getPrecio());
 		return dominio;
 	}

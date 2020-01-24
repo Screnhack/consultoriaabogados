@@ -15,7 +15,7 @@ import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;
 @SpringBootTest
 public class FormateoFechasPruebas {
 
-	private static final String FORMATO_FECHA_STRING = "2020-01-20";
+	private static final String FORMATO_FECHA_STRING = "20/01/2020";
 	private static final String FORMATO_FECHA_STRING_INVALIDO = "20202001";
 	private static final String FORMATO_FECHA_INVALIDO = "Formato de fecha Invalido";
 
