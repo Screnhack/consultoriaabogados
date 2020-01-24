@@ -15,7 +15,7 @@ public class ConsultaAbogadoComando {
 	private String celular;
 	private String tipoConsultoria;
 	private String estado;
-	private Date fechaConsulta;
+	private String fechaConsulta;
 	private float precio;
 
 }
