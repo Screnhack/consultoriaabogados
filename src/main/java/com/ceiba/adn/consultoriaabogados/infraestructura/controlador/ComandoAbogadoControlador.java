@@ -1,5 +1,6 @@
 package com.ceiba.adn.consultoriaabogados.infraestructura.controlador;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import com.ceiba.adn.consultoriaabogados.aplicacion.comando.manejador.CrearConsu
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/comando/abogado")
 @Api(tags = { "Controlador de abogados" })

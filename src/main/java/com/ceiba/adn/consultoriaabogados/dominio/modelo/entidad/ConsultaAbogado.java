@@ -2,11 +2,9 @@ package com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad;
 
 import java.util.Date;
 
-import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;
 import com.ceiba.adn.consultoriaabogados.dominio.validador.ValidadorArgumentos;
 
 public class ConsultaAbogado {
-	private FormatearFechas formatearFecha;
 
 	private static final String NOMBRE_ESTA_VACIO = "Se debe ingresar el nombre del cliente";
 	private static final String IDENTIFICACION_ESTA_VACIA = "Se debe ingresar la identificacion del cliente";
@@ -30,7 +28,6 @@ public class ConsultaAbogado {
 		ValidadorArgumentos.validarRequeridos(fecha, FECHA_ESTA_VACIA);
 		ValidadorArgumentos.validarEstadosConsulta(estado, ESTADO_INVALIDO);
 		ValidadorArgumentos.validarTipoConsulta(tipoConsultoria, TIPO_DE_CONSULTA_INVALIDO);
-		this.formatearFecha = new FormatearFechas();
 		this.nombre = nombre;
 		this.identificacion = identificacion;
 		this.celular = celular;

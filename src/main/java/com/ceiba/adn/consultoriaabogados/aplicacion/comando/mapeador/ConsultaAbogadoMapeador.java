@@ -2,13 +2,9 @@ package com.ceiba.adn.consultoriaabogados.aplicacion.comando.mapeador;
 
 import com.ceiba.adn.consultoriaabogados.aplicacion.comando.ConsultaAbogadoComando;
 import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
-import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;
 
 public final class ConsultaAbogadoMapeador {
-	private FormatearFechas formatearFecha;
-	
 	private ConsultaAbogadoMapeador() {
-		this.formatearFecha = new FormatearFechas();
 	}
 
 	private static final ConsultaAbogadoMapeador INSTANCE = new ConsultaAbogadoMapeador();

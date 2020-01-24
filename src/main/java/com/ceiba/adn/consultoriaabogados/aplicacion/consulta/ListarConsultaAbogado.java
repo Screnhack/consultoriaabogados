@@ -15,5 +15,5 @@ public class ListarConsultaAbogado {
 	private String tipoConsultoria;
 	private String estado;
 	private Date fechaConsulta;
-
+	
 }
