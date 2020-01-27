@@ -1,7 +1,11 @@
 package com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
+import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionDiaProhibidos;
+import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionTipoConsulta;
 import com.ceiba.adn.consultoriaabogados.dominio.validador.ValidadorArgumentos;
 
 public class ConsultaAbogado {
@@ -12,6 +16,9 @@ public class ConsultaAbogado {
 	private static final String ESTADO_INVALIDO = "Se debe ingresar un tipo de valido de estado";
 	private static final String TIPO_DE_CONSULTA_INVALIDO = "Se debe ingresar un tipo valido de consulta";
 	private static final String ID_CONSULTA_ES_VACIA = "Se debe ingresar el id de la consulta";
+	private static final String DIA_DOMINGO = "El Domingo no se pueden agendar citas";
+	private static final String DIA_LUNES = "El lunes no se pueden agendar citas de tipo judicial";
+	private static final double PROCENTAJE_AUMENTO_SABADO = 0.5;
 
 	private Long id;
 	private String nombre;
@@ -108,6 +115,56 @@ public class ConsultaAbogado {
 
 	public void validarIdConsulta() {
 		ValidadorArgumentos.validarRequeridos(id, ID_CONSULTA_ES_VACIA);
+	}
+
+	public void validarConsultaDiaDomingo(Date fechaConsulta) {
+		GregorianCalendar fechaCalendario = new GregorianCalendar();
+		fechaCalendario.setTime(fechaConsulta);
+		int diaSemana = fechaCalendario.get(Calendar.DAY_OF_WEEK);
+		if (diaSemana == Calendar.SUNDAY) {
+			throw new ExcepcionDiaProhibidos(DIA_DOMINGO);
+		}
+	}
+
+	public Boolean validarConsultaDiaSabado(Date fechaConsulta) {
+		boolean respuesta = false;
+		GregorianCalendar fechaCalendario = new GregorianCalendar();
+		fechaCalendario.setTime(fechaConsulta);
+		int diaSemana = fechaCalendario.get(Calendar.DAY_OF_WEEK);
+		if (diaSemana == Calendar.SATURDAY) {
+			respuesta = true;
+		}
+		return respuesta;
+	}
+
+	public void validarConsultaDiaLunesJudicial(Date fechaConsulta) {
+		GregorianCalendar fechaCalendario = new GregorianCalendar();
+		fechaCalendario.setTime(fechaConsulta);
+		int diaSemana = fechaCalendario.get(Calendar.DAY_OF_WEEK);
+		if (diaSemana == Calendar.MONDAY) {
+			throw new ExcepcionDiaProhibidos(DIA_LUNES);
+		}
+	}
+
+	public void precioTipoConsulta() {
+		switch (tipoConsultoria) {
+		case "FAMILIAR":
+			precio = 100000;
+			break;
+		case "JUDICIAL":
+			validarConsultaDiaLunesJudicial(fechaConsulta);
+			precio = 200000;
+			break;
+		case "ECONOMICO":
+			precio = 110000;
+			break;
+		default:
+			throw new ExcepcionTipoConsulta(TIPO_DE_CONSULTA_INVALIDO);
+		}
+		boolean aumento = validarConsultaDiaSabado(fechaConsulta);
+		if (aumento) {
+			precio = (float) (precio + (precio * PROCENTAJE_AUMENTO_SABADO));
+		}
 	}
 
 }

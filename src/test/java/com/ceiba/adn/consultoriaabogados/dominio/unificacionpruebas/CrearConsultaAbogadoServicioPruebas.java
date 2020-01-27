@@ -20,6 +20,7 @@ import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
 import com.ceiba.adn.consultoriaabogados.dominio.puerto.repositorio.ConsultaAbogadoRepositorio;
 import com.ceiba.adn.consultoriaabogados.dominio.servicio.CrearConsultaAbogadoServicio;
 import com.ceiba.adn.consultoriaabogados.dominio.util.FormatearFechas;
+
 @SpringBootTest
 public class CrearConsultaAbogadoServicioPruebas {
 
@@ -83,7 +84,8 @@ public class CrearConsultaAbogadoServicioPruebas {
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		try {
-			this.servicio
+
+			this.consultaAbogado
 					.validarConsultaDiaDomingo(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_DOMINGO));
 			fail();
 		} catch (ExcepcionDiaProhibidos e) {
@@ -98,7 +100,7 @@ public class CrearConsultaAbogadoServicioPruebas {
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		try {
-			this.servicio
+			this.consultaAbogado
 					.validarConsultaDiaDomingo(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_LUNES));
 		} catch (ExcepcionDiaProhibidos e) {
 			assertThat(e.getMessage()).isEqualTo(DIA_DOMINGO);
@@ -112,7 +114,7 @@ public class CrearConsultaAbogadoServicioPruebas {
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		try {
-			this.servicio.validarConsultaDiaLunesJudicial(
+			this.consultaAbogado.validarConsultaDiaLunesJudicial(
 					this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_LUNES));
 			fail();
 		} catch (ExcepcionDiaProhibidos e) {
@@ -126,17 +128,18 @@ public class CrearConsultaAbogadoServicioPruebas {
 				.conFechaConsulta(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_SABADO));
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
-		assertTrue(this.servicio
+		assertTrue(this.consultaAbogado
 				.validarConsultaDiaSabado(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_SABADO)));
 	}
 
 	@Test
 	public void validarPrecioTipoConsultaIncorrecto() {
-		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(PENAL);
+		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(PENAL)
+				.conFechaConsulta(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		try {
-			this.servicio.precioTipoConsulta(PENAL, this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
+			this.consultaAbogado.precioTipoConsulta();
 			fail();
 		} catch (ExcepcionTipoConsulta e) {
 			assertThat(e.getMessage()).isEqualTo(TIPO_DE_CONSULTA_INVALIDO);
@@ -145,47 +148,42 @@ public class CrearConsultaAbogadoServicioPruebas {
 
 	@Test
 	public void validarPrecioTipoConsultaFamiliarCorrecto() {
-		float precioConsultaRespuesta = 0;
-		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(FAMILIAR);
+		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(FAMILIAR)
+				.conFechaConsulta(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
-		precioConsultaRespuesta = this.servicio.precioTipoConsulta(FAMILIAR,
-				this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
-		assertThat(precioConsultaRespuesta).isEqualTo(PRECIO_CONSULTA_FAMILIAR);
+		this.consultaAbogado.precioTipoConsulta();
+		assertThat(this.consultaAbogado.getPrecio()).isEqualTo(PRECIO_CONSULTA_FAMILIAR);
 	}
 
 	@Test
 	public void validarPrecioTipoConsultaJudicialCorrecto() {
-		float precioConsultaRespuesta = 0;
-		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(JUDICIAL);
+		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(JUDICIAL)
+				.conFechaConsulta(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
-		precioConsultaRespuesta = this.servicio.precioTipoConsulta(JUDICIAL,
-				this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
-		assertThat(precioConsultaRespuesta).isEqualTo(PRECIO_CONSULTA_JUDICIAL);
+		this.consultaAbogado.precioTipoConsulta();
+		assertThat(this.consultaAbogado.getPrecio()).isEqualTo(PRECIO_CONSULTA_JUDICIAL);
 	}
 
 	@Test
 	public void validarPrecioTipoConsultaEconomicoCorrecto() {
-		float precioConsultaRespuesta = 0;
-		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(ECONOMICO);
+		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(ECONOMICO)
+				.conFechaConsulta(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
-		precioConsultaRespuesta = this.servicio.precioTipoConsulta(ECONOMICO,
-				this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
-		assertThat(precioConsultaRespuesta).isEqualTo(PRECIO_CONSULTA_ECONOMICO);
+		this.consultaAbogado.precioTipoConsulta();
+		assertThat(this.consultaAbogado.getPrecio()).isEqualTo(PRECIO_CONSULTA_ECONOMICO);
 	}
 
 	@Test
 	public void validarPrecioTipoConsultaFamiliarCorrectoConAumento() {
-		float precioConsultaRespuesta = 0;
 		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(FAMILIAR)
 				.conFechaConsulta(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_SABADO));
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
-		precioConsultaRespuesta = this.servicio.precioTipoConsulta(FAMILIAR,
-				this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_SABADO));
-		assertThat(precioConsultaRespuesta).isEqualTo(PRECIO_CONSULTA_FAMILIAR_AUMENTO);
+		this.consultaAbogado.precioTipoConsulta();
+		assertThat(this.consultaAbogado.getPrecio()).isEqualTo(PRECIO_CONSULTA_FAMILIAR_AUMENTO);
 	}
 
 	@Test
