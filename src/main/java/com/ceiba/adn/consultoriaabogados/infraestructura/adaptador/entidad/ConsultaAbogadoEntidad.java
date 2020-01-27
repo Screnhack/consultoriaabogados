@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,12 +48,15 @@ public class ConsultaAbogadoEntidad implements Serializable {
 
 	@Column(name = "estado", nullable = false)
 	private String estado;
-
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha_consulta")
 	private Date fechaConsulta;
 
 	@Column(name = "precio", nullable = false)
 	private float precio;
+
+
+	
 
 }

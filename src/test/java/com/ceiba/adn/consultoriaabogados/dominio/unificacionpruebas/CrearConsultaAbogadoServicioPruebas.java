@@ -29,10 +29,10 @@ public class CrearConsultaAbogadoServicioPruebas {
 	private ConsultaAbogadoPruebaDataBuilder consultaBuilder;
 	private FormatearFechas formatearFechas;
 	private static final String IDENTIFICACION = "1020145562";
-	private static final String FECHA_CONSULTA_STRING = "22/01/2020";
-	private static final String FECHA_CONSULTA_STRING_SABADO = "18/01/2020";
-	private static final String FECHA_CONSULTA_STRING_DOMINGO = "19/01/2020";
-	private static final String FECHA_CONSULTA_STRING_LUNES = "20/01/2020";
+	private static final String FECHA_CONSULTA_STRING = "2020-01-22";
+	private static final String FECHA_CONSULTA_STRING_SABADO = "2020-01-18";
+	private static final String FECHA_CONSULTA_STRING_DOMINGO = "2020-01-19";
+	private static final String FECHA_CONSULTA_STRING_LUNES = "2020-01-20";
 	private static final String NOMBRE_CLIENTE = "Juan Camilo Sanmiguel";
 	private static final String CELULAR = "3174526532";
 	private static final String ESTADO_VALIDO = "PAGADO";
