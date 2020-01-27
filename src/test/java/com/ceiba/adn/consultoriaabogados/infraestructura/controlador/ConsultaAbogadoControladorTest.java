@@ -69,9 +69,8 @@ public class ConsultaAbogadoControladorTest {
 
 		System.out.println(jsonConsultaComando.toString());
 		System.out.println(jsonComandoRespuesta.get("value"));
-		this.mockMvc
-				.perform(post("/api/comando/abogado").content(jsonConsultaComando.toString())
-						.contentType(MediaType.APPLICATION_JSON));
+		this.mockMvc.perform(post("/api/comando/abogado").content(jsonConsultaComando.toString())
+				.contentType(MediaType.APPLICATION_JSON));
 	}
 
 }

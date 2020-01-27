@@ -15,7 +15,7 @@ public class CrearConsultaAbogadoServicio {
 	}
 
 	public ConsultaAbogado ejecutar(ConsultaAbogado consultaAbogado) {
-		consultaAbogado.validarConsultaDiaDomingo(consultaAbogado.getFechaConsulta());
+		consultaAbogado.validarConsultaDiaDomingo();
 		consultaAbogado.precioTipoConsulta();
 		validarConsultasClienteDia(consultaAbogado.getIdentificacion(), consultaAbogado.getFechaConsulta());
 		return this.consultaAbogadoRepositorio.crearConsulta(consultaAbogado);

@@ -86,7 +86,7 @@ public class CrearConsultaAbogadoServicioPruebas {
 		try {
 
 			this.consultaAbogado
-					.validarConsultaDiaDomingo(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_DOMINGO));
+					.validarConsultaDiaDomingo();
 			fail();
 		} catch (ExcepcionDiaProhibidos e) {
 			assertThat(e.getMessage()).isEqualTo(DIA_DOMINGO);
@@ -101,7 +101,7 @@ public class CrearConsultaAbogadoServicioPruebas {
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		try {
 			this.consultaAbogado
-					.validarConsultaDiaDomingo(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_LUNES));
+					.validarConsultaDiaDomingo();
 		} catch (ExcepcionDiaProhibidos e) {
 			assertThat(e.getMessage()).isEqualTo(DIA_DOMINGO);
 		}
@@ -114,8 +114,7 @@ public class CrearConsultaAbogadoServicioPruebas {
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		try {
-			this.consultaAbogado.validarConsultaDiaLunesJudicial(
-					this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_LUNES));
+			this.consultaAbogado.validarConsultaDiaLunesJudicial();
 			fail();
 		} catch (ExcepcionDiaProhibidos e) {
 			assertThat(e.getMessage()).isEqualTo(DIA_LUNES);
@@ -129,7 +128,7 @@ public class CrearConsultaAbogadoServicioPruebas {
 		this.consultaAbogado = this.consultaBuilder.build();
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		assertTrue(this.consultaAbogado
-				.validarConsultaDiaSabado(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING_SABADO)));
+				.validarConsultaDiaSabado());
 	}
 
 	@Test

@@ -6,6 +6,7 @@ import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
 
 public class ConsultaAbogadoPruebaDataBuilder {
 
+	private Long id;
 	private String nombre;
 	private String identificacion;
 	private String celular;
@@ -14,6 +15,11 @@ public class ConsultaAbogadoPruebaDataBuilder {
 	private Date fechaConsulta;
 
 	public ConsultaAbogadoPruebaDataBuilder() {
+	}
+	
+	public ConsultaAbogadoPruebaDataBuilder conId(Long id) {
+		this.id = id;
+		return this;
 	}
 
 	public ConsultaAbogadoPruebaDataBuilder conNombre(String nombre) {
@@ -48,6 +54,7 @@ public class ConsultaAbogadoPruebaDataBuilder {
 
 	public ConsultaAbogado build() {
 		ConsultaAbogado consultaAbogado = new ConsultaAbogado();
+		consultaAbogado.setId(this.id);
 		consultaAbogado.setNombre(this.nombre);
 		consultaAbogado.setIdentificacion(this.identificacion);
 		consultaAbogado.setCelular(this.celular);

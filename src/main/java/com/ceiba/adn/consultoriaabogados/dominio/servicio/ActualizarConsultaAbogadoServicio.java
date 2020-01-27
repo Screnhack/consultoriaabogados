@@ -17,7 +17,7 @@ public class ActualizarConsultaAbogadoServicio {
 	public ConsultaAbogado actualizarConsultaAbogado(ConsultaAbogado consultaAbogado) {
 		consultaAbogado.validarIdConsulta();
 		if (validarConsultaAbogadoExiste(consultaAbogado.getId()) != null) {
-			consultaAbogado.validarConsultaDiaDomingo(consultaAbogado.getFechaConsulta());
+			consultaAbogado.validarConsultaDiaDomingo();
 			consultaAbogado.precioTipoConsulta();
 			return this.consultaAbogadoRepositorio.crearConsulta(consultaAbogado);
 		} else {

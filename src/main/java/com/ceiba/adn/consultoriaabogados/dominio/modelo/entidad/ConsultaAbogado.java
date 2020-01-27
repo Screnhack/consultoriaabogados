@@ -117,7 +117,7 @@ public class ConsultaAbogado {
 		ValidadorArgumentos.validarRequeridos(id, ID_CONSULTA_ES_VACIA);
 	}
 
-	public void validarConsultaDiaDomingo(Date fechaConsulta) {
+	public void validarConsultaDiaDomingo() {
 		GregorianCalendar fechaCalendario = new GregorianCalendar();
 		fechaCalendario.setTime(fechaConsulta);
 		int diaSemana = fechaCalendario.get(Calendar.DAY_OF_WEEK);
@@ -126,7 +126,7 @@ public class ConsultaAbogado {
 		}
 	}
 
-	public Boolean validarConsultaDiaSabado(Date fechaConsulta) {
+	public Boolean validarConsultaDiaSabado() {
 		boolean respuesta = false;
 		GregorianCalendar fechaCalendario = new GregorianCalendar();
 		fechaCalendario.setTime(fechaConsulta);
@@ -137,7 +137,7 @@ public class ConsultaAbogado {
 		return respuesta;
 	}
 
-	public void validarConsultaDiaLunesJudicial(Date fechaConsulta) {
+	public void validarConsultaDiaLunesJudicial() {
 		GregorianCalendar fechaCalendario = new GregorianCalendar();
 		fechaCalendario.setTime(fechaConsulta);
 		int diaSemana = fechaCalendario.get(Calendar.DAY_OF_WEEK);
@@ -152,7 +152,7 @@ public class ConsultaAbogado {
 			precio = 100000;
 			break;
 		case "JUDICIAL":
-			validarConsultaDiaLunesJudicial(fechaConsulta);
+			validarConsultaDiaLunesJudicial();
 			precio = 200000;
 			break;
 		case "ECONOMICO":
@@ -161,7 +161,7 @@ public class ConsultaAbogado {
 		default:
 			throw new ExcepcionTipoConsulta(TIPO_DE_CONSULTA_INVALIDO);
 		}
-		boolean aumento = validarConsultaDiaSabado(fechaConsulta);
+		boolean aumento = validarConsultaDiaSabado();
 		if (aumento) {
 			precio = (float) (precio + (precio * PROCENTAJE_AUMENTO_SABADO));
 		}
