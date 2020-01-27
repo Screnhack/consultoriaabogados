@@ -15,6 +15,7 @@ public final class ConsultaAbogadoMapeador {
 
 	public ConsultaAbogadoComando aComando(ConsultaAbogado entidad) {
 		ConsultaAbogadoComando dominio = new ConsultaAbogadoComando();
+		dominio.setId(entidad.getId());
 		dominio.setNombre(entidad.getNombre());
 		dominio.setIdentificacion(entidad.getIdentificacion());
 		dominio.setCelular(entidad.getCelular());

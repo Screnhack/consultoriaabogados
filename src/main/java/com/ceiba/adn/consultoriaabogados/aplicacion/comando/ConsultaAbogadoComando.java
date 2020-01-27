@@ -12,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ConsultaAbogadoComando {
+	private Long id;
 	private String nombre;
 	private String identificacion;
 	private String celular;

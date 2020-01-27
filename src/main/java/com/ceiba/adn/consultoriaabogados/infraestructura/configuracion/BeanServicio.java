@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.ceiba.adn.consultoriaabogados.dominio.puerto.repositorio.ConsultaAbogadoRepositorio;
+import com.ceiba.adn.consultoriaabogados.dominio.servicio.ActualizarConsultaAbogadoServicio;
 import com.ceiba.adn.consultoriaabogados.dominio.servicio.BuscarConsultaAbogadoServicio;
 import com.ceiba.adn.consultoriaabogados.dominio.servicio.CrearConsultaAbogadoServicio;
 import com.ceiba.adn.consultoriaabogados.dominio.servicio.ListarConsultasAbogadoServicio;
@@ -27,5 +28,11 @@ public class BeanServicio {
 	public BuscarConsultaAbogadoServicio buscarConsultaAbogadoServicio(
 			ConsultaAbogadoRepositorio consultaAbogadoRepositorio) {
 		return new BuscarConsultaAbogadoServicio(consultaAbogadoRepositorio);
+	}
+
+	@Bean
+	public ActualizarConsultaAbogadoServicio actualizarConsultaAbogadoServicio(
+			ConsultaAbogadoRepositorio consultaAbogadoRepositorio) {
+		return new ActualizarConsultaAbogadoServicio(consultaAbogadoRepositorio);
 	}
 }

@@ -11,6 +11,7 @@ public class ConsultaAbogado {
 	private static final String FECHA_ESTA_VACIA = "Se debe registrar la fecha de la cita";
 	private static final String ESTADO_INVALIDO = "Se debe ingresar un tipo de valido de estado";
 	private static final String TIPO_DE_CONSULTA_INVALIDO = "Se debe ingresar un tipo valido de consulta";
+	private static final String ID_CONSULTA_ES_VACIA = "Se debe ingresar el id de la consulta";
 
 	private Long id;
 	private String nombre;
@@ -21,13 +22,14 @@ public class ConsultaAbogado {
 	private Date fechaConsulta;
 	private float precio;
 
-	public ConsultaAbogado(String nombre, String identificacion, String celular, String tipoConsultoria, String estado,
-			Date fecha) {
+	public ConsultaAbogado(Long id, String nombre, String identificacion, String celular, String tipoConsultoria,
+			String estado, Date fecha) {
 		ValidadorArgumentos.validarRequeridos(nombre, NOMBRE_ESTA_VACIO);
 		ValidadorArgumentos.validarRequeridos(identificacion, IDENTIFICACION_ESTA_VACIA);
 		ValidadorArgumentos.validarRequeridos(fecha, FECHA_ESTA_VACIA);
 		ValidadorArgumentos.validarEstadosConsulta(estado, ESTADO_INVALIDO);
 		ValidadorArgumentos.validarTipoConsulta(tipoConsultoria, TIPO_DE_CONSULTA_INVALIDO);
+		this.id = id;
 		this.nombre = nombre;
 		this.identificacion = identificacion;
 		this.celular = celular;
@@ -102,6 +104,10 @@ public class ConsultaAbogado {
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
+	}
+
+	public void validarIdConsulta() {
+		ValidadorArgumentos.validarRequeridos(id, ID_CONSULTA_ES_VACIA);
 	}
 
 }
