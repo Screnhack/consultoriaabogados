@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionDiaProhibidos;
-import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionTipoConsulta;
 import com.ceiba.adn.consultoriaabogados.dominio.validador.ValidadorArgumentos;
 
 public class ConsultaAbogado {
@@ -147,24 +146,15 @@ public class ConsultaAbogado {
 	}
 
 	public void precioTipoConsulta() {
-		switch (tipoConsultoria) {
-		case "FAMILIAR":
-			precio = 100000;
-			break;
-		case "JUDICIAL":
-			validarConsultaDiaLunesJudicial();
-			precio = 200000;
-			break;
-		case "ECONOMICO":
-			precio = 110000;
-			break;
-		default:
-			throw new ExcepcionTipoConsulta(TIPO_DE_CONSULTA_INVALIDO);
-		}
+		TipoConsultoria consultaTipo = Enum.valueOf(TipoConsultoria.class, tipoConsultoria);
+		float precioConsulta = Float.parseFloat(consultaTipo.getPrecioConsulta());
 		boolean aumento = validarConsultaDiaSabado();
 		if (aumento) {
-			precio = (float) (precio + (precio * PROCENTAJE_AUMENTO_SABADO));
+			precio = (float) (precioConsulta + (precioConsulta * PROCENTAJE_AUMENTO_SABADO));
+		} else {
+			precio = precioConsulta;
 		}
+
 	}
 
 }

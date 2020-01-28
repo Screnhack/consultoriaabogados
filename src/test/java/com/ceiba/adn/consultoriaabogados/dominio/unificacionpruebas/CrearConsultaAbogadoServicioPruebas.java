@@ -15,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.ceiba.adn.consultoriaabogados.dominio.databuilder.ConsultaAbogadoPruebaDataBuilder;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionClienteConsultaDia;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionDiaProhibidos;
-import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionTipoConsulta;
 import com.ceiba.adn.consultoriaabogados.dominio.modelo.entidad.ConsultaAbogado;
 import com.ceiba.adn.consultoriaabogados.dominio.puerto.repositorio.ConsultaAbogadoRepositorio;
 import com.ceiba.adn.consultoriaabogados.dominio.servicio.CrearConsultaAbogadoServicio;
@@ -44,9 +43,7 @@ public class CrearConsultaAbogadoServicioPruebas {
 	private static final float PRECIO_CONSULTA_JUDICIAL = 200000;
 	private static final String ECONOMICO = "ECONOMICO";
 	private static final float PRECIO_CONSULTA_ECONOMICO = 110000;
-	private static final String PENAL = "PENAL";
 	private static final String DIA_DOMINGO = "El Domingo no se pueden agendar citas";
-	private static final String TIPO_DE_CONSULTA_INVALIDO = "Se debe ingresar un tipo valido de consulta";
 	private static final String DIA_LUNES = "El lunes no se pueden agendar citas de tipo judicial";
 	private static final String CLIENTE_CONSULTA_DIA_EXISTE = "El Cliente ya tiene cita para el dia seleccionado";
 
@@ -129,20 +126,6 @@ public class CrearConsultaAbogadoServicioPruebas {
 		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
 		assertTrue(this.consultaAbogado
 				.validarConsultaDiaSabado());
-	}
-
-	@Test
-	public void validarPrecioTipoConsultaIncorrecto() {
-		this.consultaBuilder = new ConsultaAbogadoPruebaDataBuilder().conTipoConsultoria(PENAL)
-				.conFechaConsulta(this.formatearFechas.formatearFechaDate(FECHA_CONSULTA_STRING));
-		this.consultaAbogado = this.consultaBuilder.build();
-		this.servicio = new CrearConsultaAbogadoServicio(this.repositorio);
-		try {
-			this.consultaAbogado.precioTipoConsulta();
-			fail();
-		} catch (ExcepcionTipoConsulta e) {
-			assertThat(e.getMessage()).isEqualTo(TIPO_DE_CONSULTA_INVALIDO);
-		}
 	}
 
 	@Test

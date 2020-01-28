@@ -26,13 +26,13 @@ public class ManejadorError {
 	private static final ConcurrentHashMap<String, Integer> CODIGOS_ESTADO = new ConcurrentHashMap<>();
 
 	public ManejadorError() {
-		CODIGOS_ESTADO.put(ExcepcionArgumentos.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
-		CODIGOS_ESTADO.put(ExcepcionClienteConsultaDia.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
-		CODIGOS_ESTADO.put(ExcepcionDiaProhibidos.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+		CODIGOS_ESTADO.put(ExcepcionArgumentos.class.getSimpleName(), HttpStatus.NO_CONTENT.value());
+		CODIGOS_ESTADO.put(ExcepcionClienteConsultaDia.class.getSimpleName(), HttpStatus.NO_CONTENT.value());
+		CODIGOS_ESTADO.put(ExcepcionDiaProhibidos.class.getSimpleName(), HttpStatus.NOT_ACCEPTABLE.value());
 		CODIGOS_ESTADO.put(ExcepcionEstadoInvalido.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
-		CODIGOS_ESTADO.put(ExcepcionFormatoFecha.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+		CODIGOS_ESTADO.put(ExcepcionFormatoFecha.class.getSimpleName(), HttpStatus.FORBIDDEN.value());
 		CODIGOS_ESTADO.put(ExcepcionNoExisteConsultaAbogado.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
-		CODIGOS_ESTADO.put(ExcepcionTipoConsulta.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());	
+		CODIGOS_ESTADO.put(ExcepcionTipoConsulta.class.getSimpleName(), HttpStatus.FORBIDDEN.value());	
 	}
 
 	@ExceptionHandler(Exception.class)
