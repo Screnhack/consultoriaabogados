@@ -4,7 +4,7 @@ import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionArgumentos;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionEstadoInvalido;
 import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionTipoConsulta;
 
-public class ValidadorArgumentos {
+public final class ValidadorArgumentos {
 	private static final String ESTA_VACIO = "";
 	private static final String FAMILIAR = "FAMILIAR";
 	private static final String JUDICIAL = "JUDICIAL";

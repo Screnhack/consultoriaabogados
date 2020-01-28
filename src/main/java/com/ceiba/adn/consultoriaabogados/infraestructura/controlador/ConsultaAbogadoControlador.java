@@ -23,6 +23,10 @@ public class ConsultaAbogadoControlador {
 
 	private final ListarConsultasAbogadoManejador listarConsultaAbogadoManejadorConsulta;
 	private final BuscarConsultaAbogadoManejador buscarConsultaAbogadoManejador;
+	
+
+
+	
 
 	public ConsultaAbogadoControlador(ListarConsultasAbogadoManejador listarConsultaAbogadoManejadorConsulta,
 			BuscarConsultaAbogadoManejador buscarConsultaAbogadoManejador) {
