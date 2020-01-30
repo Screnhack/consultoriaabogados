@@ -45,9 +45,9 @@ public class ConsultaAbogadoControladorTest {
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 
-	@Test
-	public void listarConsultaAbogadoId() throws Exception {
-		this.mockMvc.perform(get(URL + "/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-	}
+//	@Test
+//	public void listarConsultaAbogadoId() throws Exception {
+//		this.mockMvc.perform(get(URL + "/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+//	}
 
 }
