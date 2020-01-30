@@ -30,7 +30,7 @@ public class ActualizarConsultaAbogadoServicioTest {
 	private static final String CELULAR = "3174526532";
 	private static final String ESTADO_VALIDO = "PAGADO";
 	private static final String FAMILIAR = "FAMILIAR";
-	private static final String CONSULTA_ABOGADO_NO_EXISTE = "No se encontró la consulta en base de datos";
+	private static final String CONSULTA_ABOGADO_NO_EXISTE = "No se encontro la consulta en base de datos";
 
 	@Before
 	public void setUp() {

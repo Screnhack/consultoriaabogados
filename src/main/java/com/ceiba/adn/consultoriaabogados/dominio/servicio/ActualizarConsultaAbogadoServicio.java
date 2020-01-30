@@ -8,7 +8,7 @@ import com.ceiba.adn.consultoriaabogados.dominio.puerto.repositorio.ConsultaAbog
 public class ActualizarConsultaAbogadoServicio {
 
 	private ConsultaAbogadoRepositorio consultaAbogadoRepositorio;
-	private static final String CONSULTA_ABOGADO_NO_EXISTE = "No se encontró la consulta en base de datos";
+	private static final String CONSULTA_ABOGADO_NO_EXISTE = "No se encontro la consulta en base de datos";
 
 	public ActualizarConsultaAbogadoServicio(ConsultaAbogadoRepositorio consultaAbogadoRepositorio) {
 		this.consultaAbogadoRepositorio = consultaAbogadoRepositorio;

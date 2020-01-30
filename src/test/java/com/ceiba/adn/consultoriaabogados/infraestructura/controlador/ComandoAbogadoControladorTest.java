@@ -28,7 +28,7 @@ import com.ceiba.adn.consultoriaabogados.dominio.excepcion.ExcepcionNoExisteCons
 @SpringBootTest(classes = ConsultoriaAbogadosApplication.class)
 @AutoConfigureMockMvc
 public class ComandoAbogadoControladorTest {
-	private static final String CONSULTA_ABOGADO_NO_EXISTE = "No se encontró la consulta en base de datos";
+	private static final String CONSULTA_ABOGADO_NO_EXISTE = "No se encontro la consulta en base de datos";
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
